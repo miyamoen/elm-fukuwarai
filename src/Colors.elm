@@ -3,6 +3,14 @@ module Colors exposing (..)
 import Color exposing (Color, rgba, rgb)
 
 
+elmLogo =
+    { green = rgb 127 209 59
+    , yellow = rgb 240 173 0
+    , blue = rgb 96 181 204
+    , grey = rgb 90 99 120
+    }
+
+
 black : Color
 black =
     rgb 10 10 10

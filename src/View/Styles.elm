@@ -22,7 +22,6 @@ styleSheet =
         [ style None []
         , style Symbol
             [ strokeFill Colors.ink
-            , fill <| rgba 0 0 0 0
             ]
         ]
 
