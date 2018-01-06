@@ -7,7 +7,8 @@ import Element.Attributes as Attrs exposing (..)
 import Element.Events exposing (..)
 import Types exposing (..)
 import View.Styles as Styles exposing (..)
-import Svg.Symbol as Symbol exposing (elmLogoSize)
+import Svg.Symbol as Symbol
+import Svg.Symbol.ElmLogo as ElmLogo
 import Rocket exposing ((=>))
 
 
@@ -23,7 +24,7 @@ view model =
             ]
             [ html <| Symbol.symbols
             , text "Hello, Style Elements"
-            , el None [ width <| px elmLogoSize.width, height <| px elmLogoSize.height ] <|
-                Symbol.elmLogoElement elmLogoSize.width  elmLogoSize.height
+            , el None [ width <| px <| .width ElmLogo.size, height <| px <| .height ElmLogo.size ] <|
+                ElmLogo.element (.width ElmLogo.size) (.height ElmLogo.size)
             , el Styles.Symbol [ width <| px 100, height <| px 100 ] <| Symbol.angleElement 100 100
             ]
