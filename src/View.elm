@@ -7,6 +7,7 @@ import Element.Attributes as Attrs exposing (..)
 import Element.Events exposing (..)
 import Types exposing (..)
 import View.Styles as Styles exposing (..)
+import Svg.Symbol as Symbol
 import Rocket exposing ((=>))
 
 
@@ -19,4 +20,7 @@ view model =
             , center
             , verticalCenter
             ]
-            [ text "Hello, Style Elements" ]
+            [ html <| Symbol.symbols
+            , text "Hello, Style Elements"
+            , el Styles.Symbol [ width <| px 100, height <| px 100 ] <| Symbol.angleElement 100 100
+            ]
