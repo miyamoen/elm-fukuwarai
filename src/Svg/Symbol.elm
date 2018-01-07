@@ -23,6 +23,13 @@ symbols =
         [ defs []
             [ angle
             , ElmLogo.symbol
+            , ElmLogo.oneSymbol
+            , ElmLogo.twoSymbol
+            , ElmLogo.threeSymbol
+            , ElmLogo.fourSymbol
+            , ElmLogo.fiveSymbol
+            , ElmLogo.sixSymbol
+            , ElmLogo.sevenSymbol
             ]
         ]
 
