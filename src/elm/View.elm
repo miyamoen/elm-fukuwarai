@@ -6,7 +6,7 @@ import Element.Input as Input
 import Element.Attributes as Attrs exposing (..)
 import Element.Events exposing (..)
 import Types exposing (..)
-import View.Styles as Styles exposing (..)
+import Styles exposing (..)
 import Svg.Symbol as Symbol
 import Svg.Symbol.ElmLogo as ElmLogo
 import Controller.Keyboard
@@ -26,8 +26,15 @@ view model =
                 ++ Controller.Keyboard.attributes
             )
             [ html <| Symbol.symbols
-            , text "Hello, Style Elements"
-            , el None [ width <| px <| .width ElmLogo.size, height <| px <| .height ElmLogo.size ] <|
+            , el OpeningLogo [ width <| px <| .width ElmLogo.size, height <| px <| .height ElmLogo.size ] <|
                 ElmLogo.element (.width ElmLogo.size) (.height ElmLogo.size)
-            , el Styles.Symbol [ width <| px 100, height <| px 100 ] <| Symbol.angleElement 100 100
+            , el Title [] <| text "Elm Fukuwarai "
+            , column None
+                []
+                [ row None
+                    [ verticalCenter, spacing 5 ]
+                    [ el SelectionCursor [ width <| px 20, height <| px 20 ] <| Symbol.angleElement 20 20
+                    , text "Enter to Start"
+                    ]
+                ]
             ]

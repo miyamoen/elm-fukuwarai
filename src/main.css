@@ -1,5 +1,6 @@
 body {
-  font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Source Sans Pro", "Trebuchet MS", "Lucida Grande",
+    "Bitstream Vera Sans", "Helvetica Neue", sans-serif;
   margin: 0;
   text-align: center;
   color: #293c4b;
@@ -12,4 +13,19 @@ h1 {
 img {
   margin: 20px 0;
   max-width: 200px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  5% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+    transform: scale(1.05, 1.05);
+  }
 }
