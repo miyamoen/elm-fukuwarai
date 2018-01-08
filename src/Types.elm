@@ -4,7 +4,13 @@ module Types exposing (..)
 
 
 type alias Model =
-    {}
+    { windowSize : Size }
+
+
+type alias Size =
+    { width : Int
+    , height : Int
+    }
 
 
 
@@ -13,3 +19,4 @@ type alias Model =
 
 type Msg
     = NoOp
+    | ResizeWindow Size
