@@ -15,7 +15,7 @@ img {
   max-width: 200px;
 }
 
-@keyframes pulse {
+@keyframes mini-expansion {
   0% {
     transform: scale(1, 1);
     opacity: 1;
@@ -27,5 +27,13 @@ img {
   100% {
     opacity: 0.7;
     transform: scale(1.05, 1.05);
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

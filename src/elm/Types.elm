@@ -4,11 +4,14 @@ module Types exposing (..)
 
 
 type alias Model =
-    { windowSize : Size }
+    { windowSize : Size
+    , scene : Scene
+    }
 
 
 type Scene
-    = Opening
+    = Opening Animation
+    | Loading
 
 
 type alias Size =
@@ -22,7 +25,8 @@ type alias Size =
 
 
 type Animation
-    = Start
+    = Static
+    | Running
     | End
 
 
@@ -33,3 +37,4 @@ type Animation
 type Msg
     = NoOp
     | ResizeWindow Size
+    | Start

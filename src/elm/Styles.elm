@@ -1,4 +1,4 @@
-module Styles exposing (Styles(..), styleSheet)
+module Styles exposing (Styles(..), Variations(..), styleSheet)
 
 import Style exposing (..)
 import Style.Font as Font exposing (font)
@@ -21,22 +21,50 @@ type Styles
     | SelectionCursor
 
 
-styleSheet : StyleSheet Styles variation
+type Variations
+    = MiniExpansion
+    | FadeOut
+
+
+styleSheet : StyleSheet Styles Variations
 styleSheet =
     Style.styleSheet
-        [ style None []
+        [ style None [ variation FadeOut
+                [ animations
+                    [ { defaultAnimation
+                        | name = "fade-out"
+                        , duration = 1000
+                        , easing = Easing.toString Easing.EaseOut
+                        , fill = Animation.Forwards
+                      }
+                    ]
+                ]]
         , style Symbol
             [ strokeFill Colors.ink
             ]
         , style OpeningLogo
-            [ animations
-                [ { defaultAnimation
-                    | name = "pulse"
-                    , duration = 3000
-                    , iteration = Animation.Infinite
-                    , direction = Animation.Alternate
+            [ transitions
+                [ { delay = 0
+                  , duration = 1000
+                  , easing = Easing.toString Easing.EaseOut
+                  , props = [ "box-shadow" ]
                   }
                 ]
+            , hover
+                [ Shadow.box { offset = ( 0, 0 ), size = 20, blur = 20, color = Colors.moon }
+                ]
+            , variation MiniExpansion
+                [ animations
+                    [ { defaultAnimation
+                        | name = "mini-expansion"
+                        , duration = 3000
+                        , iteration = Animation.Infinite
+                        , direction = Animation.Alternate
+                        , easing = Easing.toString Easing.EaseInOut
+                      }
+                    ]
+                ]
+
             ]
         , style Title
             [ Font.typeface

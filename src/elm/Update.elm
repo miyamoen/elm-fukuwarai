@@ -8,7 +8,9 @@ import Rocket exposing ((=>))
 
 init : ( Model, List (Cmd Msg) )
 init =
-    { windowSize = { width = 500, height = 500 } }
+    { windowSize = { width = 500, height = 500 }
+    , scene = Opening Static
+    }
         => [ Task.perform ResizeWindow Window.size ]
 
 
@@ -20,3 +22,6 @@ update msg model =
 
         ResizeWindow size ->
             { model | windowSize = size } => []
+
+        Start ->
+            { model | scene = Opening Running } => []

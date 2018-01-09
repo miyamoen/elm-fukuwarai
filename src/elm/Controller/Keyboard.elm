@@ -13,8 +13,8 @@ import Types exposing (..)
 toMsg : KeyboardEvent -> Maybe Msg
 toMsg { altKey, ctrlKey, shiftKey, metaKey, key, keyCode, repeat } =
     case ( keyCode, ctrlKey, shiftKey ) of
-        ( Key.One, False, False ) ->
-            Just NoOp
+        ( Key.Enter, False, False ) ->
+            Just Start
 
         _ ->
             Nothing
