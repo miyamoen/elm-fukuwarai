@@ -11,6 +11,7 @@ import Style.Easing as Easing exposing (Easing)
 import Color exposing (Color, rgba)
 import Color.Convert exposing (colorToCssRgba)
 import Colors
+import AnimationName
 
 
 type Styles
@@ -24,21 +25,33 @@ type Styles
 type Variations
     = MiniExpansion
     | FadeOut
+    | FadeIn
 
 
 styleSheet : StyleSheet Styles Variations
 styleSheet =
     Style.styleSheet
-        [ style None [ variation FadeOut
+        [ style None
+            [ variation FadeOut
                 [ animations
                     [ { defaultAnimation
-                        | name = "fade-out"
+                        | name = AnimationName.fadeOut
                         , duration = 1000
                         , easing = Easing.toString Easing.EaseOut
                         , fill = Animation.Forwards
                       }
                     ]
-                ]]
+                ]
+            , variation FadeIn
+                [ animations
+                    [ { defaultAnimation
+                        | name = AnimationName.fadeIn
+                        , duration = 1000
+                        , easing = Easing.toString Easing.EaseIn
+                      }
+                    ]
+                ]
+            ]
         , style Symbol
             [ strokeFill Colors.ink
             ]
@@ -51,12 +64,11 @@ styleSheet =
                   }
                 ]
             , hover
-                [ Shadow.box { offset = ( 0, 0 ), size = 20, blur = 20, color = Colors.moon }
-                ]
+                [ Shadow.box { offset = ( 0, 0 ), size = 20, blur = 20, color = Colors.moon } ]
             , variation MiniExpansion
                 [ animations
                     [ { defaultAnimation
-                        | name = "mini-expansion"
+                        | name = AnimationName.miniExpand
                         , duration = 3000
                         , iteration = Animation.Infinite
                         , direction = Animation.Alternate
@@ -64,7 +76,6 @@ styleSheet =
                       }
                     ]
                 ]
-
             ]
         , style Title
             [ Font.typeface

@@ -10,20 +10,20 @@ import Keyboard.Key as Key
 import Types exposing (..)
 
 
-toMsg : KeyboardEvent -> Maybe Msg
-toMsg { altKey, ctrlKey, shiftKey, metaKey, key, keyCode, repeat } =
+toMsg : Model -> KeyboardEvent -> Maybe Msg
+toMsg model { altKey, ctrlKey, shiftKey, metaKey, key, keyCode, repeat } =
     case ( keyCode, ctrlKey, shiftKey ) of
         ( Key.Enter, False, False ) ->
-            Just Start
+            Just StartOpeningAnimation
 
         _ ->
             Nothing
 
 
-onKeyDown : Attribute variation Msg
-onKeyDown =
+onKeyDown : Model -> Attribute variation Msg
+onKeyDown model =
     onWithOptions "keydown" (Options True True) <|
-        considerKeyboardEvent toMsg
+        considerKeyboardEvent (toMsg model)
 
 
 type alias Options =
@@ -51,9 +51,9 @@ id =
     Element.Attributes.id idString
 
 
-attributes : List (Attribute variation Msg)
-attributes =
+attributes : Model -> List (Attribute variation Msg)
+attributes model =
     [ id
     , attribute "tabindex" "0"
-    , onKeyDown
+    , onKeyDown model
     ]

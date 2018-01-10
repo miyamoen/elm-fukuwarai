@@ -7,6 +7,8 @@ import Types exposing (..)
 import Styles exposing (..)
 import Svg.Symbol as Symbol
 import Svg.Symbol.ElmLogo as ElmLogo
+import AnimationName
+import AnimationEvents exposing (animationEnd, considerAnimationEvent)
 import Rocket exposing ((=>))
 
 
@@ -16,13 +18,21 @@ view animation model =
         [ spacing 10
         , center
         , verticalCenter
-            , vary FadeOut (animation == Running)
-
+        , vary FadeOut (animation == Running)
+        , on animationEnd <|
+            considerAnimationEvent
+                (\{ name } ->
+                    if name == AnimationName.fadeOut then
+                        Just EndOpeningAnimation
+                    else
+                        Nothing
+                )
         ]
         [ el OpeningLogo
             [ width <| px <| .width ElmLogo.size
             , height <| px <| .height ElmLogo.size
             , vary MiniExpansion (animation == Static)
+            , onClick StartOpeningAnimation
             ]
           <|
             ElmLogo.element (.width ElmLogo.size) (.height ElmLogo.size)
@@ -36,4 +46,3 @@ view animation model =
                 ]
             ]
         ]
-

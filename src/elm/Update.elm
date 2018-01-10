@@ -23,5 +23,8 @@ update msg model =
         ResizeWindow size ->
             { model | windowSize = size } => []
 
-        Start ->
+        StartOpeningAnimation ->
             { model | scene = Opening Running } => []
+
+        EndOpeningAnimation ->
+            { model | scene = Playing } => []

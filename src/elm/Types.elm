@@ -11,7 +11,7 @@ type alias Model =
 
 type Scene
     = Opening Animation
-    | Loading
+    | Playing
 
 
 type alias Size =
@@ -37,4 +37,5 @@ type Animation
 type Msg
     = NoOp
     | ResizeWindow Size
-    | Start
+    | StartOpeningAnimation
+    | EndOpeningAnimation

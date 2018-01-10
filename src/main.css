@@ -15,7 +15,7 @@ img {
   max-width: 200px;
 }
 
-@keyframes mini-expansion {
+@keyframes mini-expand {
   0% {
     transform: scale(1, 1);
     opacity: 1;
@@ -35,5 +35,14 @@ img {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

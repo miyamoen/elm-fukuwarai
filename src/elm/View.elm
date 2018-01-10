@@ -23,12 +23,12 @@ view model =
              , center
              , verticalCenter
              ]
-                ++ Controller.Keyboard.attributes
+                ++ Controller.Keyboard.attributes model
             )
             [ html <| Symbol.symbols
             , case model.scene of
-                Loading ->
-                    text "loading"
+                Playing ->
+                    el None [ vary FadeIn True, onClick StartOpeningAnimation ] <| text "Palying"
 
                 Opening animation ->
                     View.Opening.view animation model
