@@ -1,4 +1,4 @@
-module Animation.Events
+module AnimationEvents
     exposing
         ( AnimationEvent
         , decodeAnimationEvent
