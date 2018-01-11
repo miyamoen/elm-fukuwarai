@@ -54,5 +54,6 @@ type Animation
 type Msg
     = NoOp
     | ResizeWindow Size
+    | SetPieces (List Piece)
     | StartOpeningAnimation
     | EndOpeningAnimation

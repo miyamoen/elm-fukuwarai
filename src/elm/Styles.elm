@@ -21,6 +21,7 @@ type Styles
     | Title
     | SelectionCursor
     | GameFrame
+    | Pieces
 
 
 type Variations
@@ -104,6 +105,8 @@ styleSheet =
                   }
                 ]
             ]
+        , style Pieces
+            [ Transition.all ]
         ]
 
 

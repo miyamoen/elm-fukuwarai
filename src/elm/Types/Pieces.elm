@@ -1,5 +1,6 @@
 module Types.Pieces exposing (..)
 
+import Random exposing (Generator)
 import Types exposing (..)
 import Svg.Symbol.Types exposing (Pieces(..))
 import Svg.Symbol.ElmLogo exposing (size)
@@ -43,3 +44,37 @@ getCenter piece =
 
         Seven ->
             { x = 8.869 + (314.43 - 8.869) / 2, y = 170.517 + (323.298 - 170.517) / 2 }
+
+
+
+---- Random ----
+
+
+positionGenerator : Size -> Generator Position
+positionGenerator { width, height } =
+    Random.map2 Position
+        (Random.float 20 <| toFloat <| width - 20)
+        (Random.float 20 <| toFloat <| height - 20)
+
+
+degreeGenerator : Generator Float
+degreeGenerator =
+    Random.int 0 (360 // 5 - 1)
+        |> Random.map (\int -> toFloat int * 5)
+
+
+toPiecesGenerator : Size -> Generator (List (Pieces -> Piece))
+toPiecesGenerator size =
+    Random.map2 Piece (positionGenerator size) degreeGenerator
+        |> Random.list 7
+
+
+piecesGenerator : Size -> Generator (List Piece)
+piecesGenerator size =
+    toPiecesGenerator size
+        |> Random.map
+            (\toPieces ->
+                List.map2 (\toPiece piece -> toPiece piece)
+                    toPieces
+                    [ One, Two, Three, Four, Five, Six, Seven ]
+            )

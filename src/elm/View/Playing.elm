@@ -38,7 +38,7 @@ pieceElement { id, position, degree } =
         center =
             Pieces.getCenter id
     in
-        el None
+        el Styles.Pieces
             [ moveRight <| position.x - center.x
             , moveDown <| position.y - center.y
             , inlineStyle

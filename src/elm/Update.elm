@@ -4,6 +4,7 @@ import Task
 import Window
 import Types exposing (..)
 import Types.Pieces as Pieces
+import Random
 import Rocket exposing ((=>))
 
 
@@ -23,7 +24,11 @@ update msg model =
             model => []
 
         ResizeWindow size ->
-            { model | windowSize = size } => []
+            { model | windowSize = size }
+                => [ Pieces.piecesGenerator size |> Random.generate SetPieces ]
+
+        SetPieces pieces ->
+            { model | pieces = pieces } => []
 
         StartOpeningAnimation ->
             { model | scene = Opening Running } => []
