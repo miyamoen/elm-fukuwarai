@@ -95,15 +95,15 @@ styleSheet =
             , strokeWidth 10
             ]
         , style GameFrame
-            [ Border.all 2
-            , Border.dotted
-            , animations
+            [ animations
                 [ { defaultAnimation
                     | name = AnimationName.fadeIn
                     , duration = 1000
                     , easing = Easing.toString Easing.EaseIn
                   }
                 ]
+            -- , Border.all 2
+            -- , Border.dotted
             ]
         , style Pieces
             [ Transition.all ]

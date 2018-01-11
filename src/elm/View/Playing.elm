@@ -17,6 +17,7 @@ view model =
         [ width Attrs.fill
         , height Attrs.fill
         , padding 20
+        , clip
         ]
     <|
         field model
