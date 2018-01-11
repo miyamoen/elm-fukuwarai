@@ -10,21 +10,6 @@ module Svg.Symbol.ElmLogo
         , sixSymbol
         , sevenSymbol
         , element
-        , oneElement
-        , twoElement
-        , threeElement
-        , fourElement
-        , fiveElement
-        , sixElement
-        , sevenElement
-        , html
-        , oneHtml
-        , twoHtml
-        , threeHtml
-        , fourHtml
-        , fiveHtml
-        , sixHtml
-        , sevenHtml
         )
 
 import Html exposing (Html)
@@ -199,88 +184,4 @@ html w h =
 element : Float -> Float -> Element style variation msg
 element w h =
     html w h
-        |> Element.html
-
-
-oneHtml : Float -> Float -> Html msg
-oneHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo One ] [] ]
-
-
-oneElement : Float -> Float -> Element style variation msg
-oneElement w h =
-    oneHtml w h
-        |> Element.html
-
-
-twoHtml : Float -> Float -> Html msg
-twoHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo Two ] [] ]
-
-
-twoElement : Float -> Float -> Element style variation msg
-twoElement w h =
-    twoHtml w h
-        |> Element.html
-
-
-threeHtml : Float -> Float -> Html msg
-threeHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo Three ] [] ]
-
-
-threeElement : Float -> Float -> Element style variation msg
-threeElement w h =
-    threeHtml w h
-        |> Element.html
-
-
-fourHtml : Float -> Float -> Html msg
-fourHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo Four ] [] ]
-
-
-fourElement : Float -> Float -> Element style variation msg
-fourElement w h =
-    fourHtml w h
-        |> Element.html
-
-
-fiveHtml : Float -> Float -> Html msg
-fiveHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo Five ] [] ]
-
-
-fiveElement : Float -> Float -> Element style variation msg
-fiveElement w h =
-    fiveHtml w h
-        |> Element.html
-
-
-sixHtml : Float -> Float -> Html msg
-sixHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo Six ] [] ]
-
-
-sixElement : Float -> Float -> Element style variation msg
-sixElement w h =
-    sixHtml w h
-        |> Element.html
-
-
-sevenHtml : Float -> Float -> Html msg
-sevenHtml w h =
-    svg [ viewBox 0 0 size.width size.height, width w, height h ]
-        [ use [ xlinkHref <| toSelector <| ElmLogo Seven ] [] ]
-
-
-sevenElement : Float -> Float -> Element style variation msg
-sevenElement w h =
-    sevenHtml w h
         |> Element.html

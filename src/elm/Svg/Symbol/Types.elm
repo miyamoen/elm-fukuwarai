@@ -1,4 +1,4 @@
-module Svg.Symbol.Types exposing (Symbol(..), Parts(..), toSelector, id)
+module Svg.Symbol.Types exposing (Symbol(..), Pieces(..), toSelector, id)
 
 import Svg exposing (Attribute)
 import Svg.Attributes
@@ -9,10 +9,10 @@ import Svg.Attributes
 
 type Symbol
     = Angle
-    | ElmLogo Parts
+    | ElmLogo Pieces
 
 
-type Parts
+type Pieces
     = All
     | One
     | Two

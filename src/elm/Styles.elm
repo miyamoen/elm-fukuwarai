@@ -20,6 +20,7 @@ type Styles
     | OpeningLogo
     | Title
     | SelectionCursor
+    | GameFrame
 
 
 type Variations
@@ -91,6 +92,17 @@ styleSheet =
             [ rotate <| degrees 90
             , strokeFill Colors.info
             , strokeWidth 10
+            ]
+        , style GameFrame
+            [ Border.all 2
+            , Border.dotted
+            , animations
+                [ { defaultAnimation
+                    | name = AnimationName.fadeIn
+                    , duration = 1000
+                    , easing = Easing.toString Easing.EaseIn
+                  }
+                ]
             ]
         ]
 

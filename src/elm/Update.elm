@@ -3,6 +3,7 @@ module Update exposing (update, init)
 import Task
 import Window
 import Types exposing (..)
+import Types.Pieces as Pieces
 import Rocket exposing ((=>))
 
 
@@ -10,6 +11,7 @@ init : ( Model, List (Cmd Msg) )
 init =
     { windowSize = { width = 500, height = 500 }
     , scene = Opening Static
+    , pieces = Pieces.model
     }
         => [ Task.perform ResizeWindow Window.size ]
 

@@ -8,10 +8,11 @@ import Element.Events exposing (..)
 import Types exposing (..)
 import Styles exposing (..)
 import Svg.Symbol as Symbol
-import Svg.Symbol.ElmLogo as ElmLogo
 import Controller.Keyboard
 import Rocket exposing ((=>))
 import View.Opening
+import View.Playing
+
 
 
 view : Model -> Html Msg
@@ -28,7 +29,7 @@ view model =
             [ html <| Symbol.symbols
             , case model.scene of
                 Playing ->
-                    el None [ vary FadeIn True, onClick StartOpeningAnimation ] <| text "Palying"
+                    View.Playing.view model
 
                 Opening animation ->
                     View.Opening.view animation model

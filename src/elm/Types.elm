@@ -1,11 +1,15 @@
 module Types exposing (..)
 
+import Svg.Symbol.Types exposing (Pieces(..))
+
+
 ---- MODEL ----
 
 
 type alias Model =
     { windowSize : Size
     , scene : Scene
+    , pieces : List Piece
     }
 
 
@@ -14,9 +18,21 @@ type Scene
     | Playing
 
 
+type alias Piece =
+    { position : Position
+    , id : Pieces
+    }
+
+
 type alias Size =
     { width : Int
     , height : Int
+    }
+
+
+type alias Position =
+    { x : Float
+    , y : Float
     }
 
 
