@@ -14,7 +14,6 @@ import View.Opening
 import View.Playing
 
 
-
 view : Model -> Html Msg
 view model =
     Element.viewport styleSheet <|

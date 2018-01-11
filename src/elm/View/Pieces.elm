@@ -9,12 +9,12 @@ import Svg.Symbol.ElmLogo as ElmLogo
 import Types exposing (..)
 
 
-toElement : Symbol -> Element style variation msg
-toElement symbol =
+toElement : Pieces -> Element style variation msg
+toElement piece =
     svg
         [ viewBox 0 0 (.width ElmLogo.size) (.height ElmLogo.size)
         , width <| .width ElmLogo.size
         , height <| .height ElmLogo.size
         ]
-        [ use [ xlinkHref <| toSelector symbol ] [] ]
+        [ use [ xlinkHref <| toSelector (ElmLogo piece) ] [] ]
         |> Element.html

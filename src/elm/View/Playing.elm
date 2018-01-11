@@ -5,8 +5,9 @@ import Element.Input as Input
 import Element.Attributes as Attrs exposing (..)
 import Element.Events exposing (..)
 import Types exposing (..)
+import Types.Pieces as Pieces
 import Styles exposing (..)
-import View.Pieces as Pieces
+import View.Pieces
 import Rocket exposing ((=>))
 
 
@@ -18,12 +19,32 @@ view model =
         , padding 20
         ]
     <|
-        el GameFrame
-            [ width Attrs.fill
-            , height Attrs.fill
-            , padding 20
-            , vary FadeIn True
-            , onClick StartOpeningAnimation
+        field model
+
+
+field : Model -> Element Styles variation Msg
+field model =
+    el GameFrame
+        [ width Attrs.fill
+        , height Attrs.fill
+        ]
+        empty
+        |> within (List.map pieceElement model.pieces)
+
+
+pieceElement : Piece -> Element Styles variation Msg
+pieceElement { id, position, degree } =
+    let
+        center =
+            Pieces.getCenter id
+    in
+        el None
+            [ moveRight <| position.x - center.x
+            , moveDown <| position.y - center.y
+            , inlineStyle
+                [ "transform-origin" => toString center.x ++ "px " ++ toString center.y ++ "px"
+                , "transform" => "rotate(" ++ toString degree ++ "deg)"
+                ]
             ]
         <|
-            text "Palying"
+            View.Pieces.toElement id

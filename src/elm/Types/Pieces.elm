@@ -7,19 +7,14 @@ import Svg.Symbol.ElmLogo exposing (size)
 
 model : List Piece
 model =
-    [ Piece originPosition One
-    , Piece originPosition Two
-    , Piece originPosition Three
-    , Piece originPosition Four
-    , Piece originPosition Five
-    , Piece originPosition Six
-    , Piece originPosition Seven
+    [ Piece (getCenter One) 0 One
+    , Piece (getCenter Two) 0 Two
+    , Piece (getCenter Three) 0 Three
+    , Piece (getCenter Four) 0 Four
+    , Piece (getCenter Five) 0 Five
+    , Piece (getCenter Six) 0 Six
+    , Piece (getCenter Seven) 0 Seven
     ]
-
-
-originPosition : Position
-originPosition =
-    { x = 0, y = 0 }
 
 
 getCenter : Pieces -> Position

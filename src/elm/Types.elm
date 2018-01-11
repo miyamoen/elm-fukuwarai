@@ -20,6 +20,7 @@ type Scene
 
 type alias Piece =
     { position : Position
+    , degree : Float
     , id : Pieces
     }
 
