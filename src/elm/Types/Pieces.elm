@@ -2,23 +2,23 @@ module Types.Pieces exposing (..)
 
 import Random exposing (Generator)
 import Types exposing (..)
-import Svg.Symbol.Types exposing (Pieces(..))
+import Svg.Symbol.Types as Symbol exposing (Pieces(..))
 import Svg.Symbol.ElmLogo exposing (size)
 
 
-model : List Piece
+model : Types.Pieces
 model =
-    [ Piece (getCenter One) 0 One
-    , Piece (getCenter Two) 0 Two
-    , Piece (getCenter Three) 0 Three
-    , Piece (getCenter Four) 0 Four
-    , Piece (getCenter Five) 0 Five
-    , Piece (getCenter Six) 0 Six
-    , Piece (getCenter Seven) 0 Seven
-    ]
+    Pieces
+        (Piece (getCenter One) 0 One)
+        (Piece (getCenter Two) 0 Two)
+        (Piece (getCenter Three) 0 Three)
+        (Piece (getCenter Four) 0 Four)
+        (Piece (getCenter Five) 0 Five)
+        (Piece (getCenter Six) 0 Six)
+        (Piece (getCenter Seven) 0 Seven)
 
 
-getCenter : Pieces -> Position
+getCenter : Symbol.Pieces -> Position
 getCenter piece =
     case piece of
         All ->
@@ -63,18 +63,61 @@ degreeGenerator =
         |> Random.map (\int -> toFloat int * 5)
 
 
-toPiecesGenerator : Size -> Generator (List (Pieces -> Piece))
+toPiecesGenerator : Size -> Generator (List (Symbol.Pieces -> Piece))
 toPiecesGenerator size =
     Random.map2 Piece (positionGenerator size) degreeGenerator
         |> Random.list 7
 
 
-piecesGenerator : Size -> Generator (List Piece)
+piecesGenerator : Size -> Generator Types.Pieces
 piecesGenerator size =
     toPiecesGenerator size
         |> Random.map
             (\toPieces ->
-                List.map2 (\toPiece piece -> toPiece piece)
-                    toPieces
-                    [ One, Two, Three, Four, Five, Six, Seven ]
+                case toPieces of
+                    one :: two :: three :: four :: five :: six :: seven :: [] ->
+                        Pieces
+                            (one One)
+                            (two Two)
+                            (three Three)
+                            (four Four)
+                            (five Five)
+                            (six Six)
+                            (seven Seven)
+
+                    _ ->
+                        Debug.crash "random mistake"
             )
+
+
+toList : Types.Pieces -> List Piece
+toList pieces =
+    [ pieces.one, pieces.two, pieces.three, pieces.four, pieces.five, pieces.six, pieces.seven ]
+
+
+toGetter : Symbol.Pieces -> (Types.Pieces -> Piece)
+toGetter piece =
+    case piece of
+        One ->
+            .one
+
+        Two ->
+            .two
+
+        Three ->
+            .three
+
+        Four ->
+            .four
+
+        Five ->
+            .five
+
+        Six ->
+            .six
+
+        Seven ->
+            .seven
+
+        All ->
+            Debug.crash "Dont use All symbol"

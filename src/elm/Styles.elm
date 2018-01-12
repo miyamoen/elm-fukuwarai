@@ -102,6 +102,7 @@ styleSheet =
                     , easing = Easing.toString Easing.EaseIn
                   }
                 ]
+
             -- , Border.all 2
             -- , Border.dotted
             ]

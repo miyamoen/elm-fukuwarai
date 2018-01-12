@@ -1,6 +1,6 @@
 module Types exposing (..)
 
-import Svg.Symbol.Types exposing (Pieces(..))
+import Svg.Symbol.Types as Symbol
 
 
 ---- MODEL ----
@@ -9,7 +9,7 @@ import Svg.Symbol.Types exposing (Pieces(..))
 type alias Model =
     { windowSize : Size
     , scene : Scene
-    , pieces : List Piece
+    , pieces : Pieces
     }
 
 
@@ -21,7 +21,18 @@ type Scene
 type alias Piece =
     { position : Position
     , degree : Float
-    , id : Pieces
+    , id : Symbol.Pieces
+    }
+
+
+type alias Pieces =
+    { one : Piece
+    , two : Piece
+    , three : Piece
+    , four : Piece
+    , five : Piece
+    , six : Piece
+    , seven : Piece
     }
 
 
@@ -54,6 +65,6 @@ type Animation
 type Msg
     = NoOp
     | ResizeWindow Size
-    | SetPieces (List Piece)
+    | SetPieces Pieces
     | StartOpeningAnimation
     | EndOpeningAnimation

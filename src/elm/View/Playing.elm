@@ -30,7 +30,7 @@ field model =
         , height Attrs.fill
         ]
         empty
-        |> within (List.map pieceElement model.pieces)
+        |> within (List.map pieceElement <| Pieces.toList model.pieces)
 
 
 pieceElement : Piece -> Element Styles variation Msg
