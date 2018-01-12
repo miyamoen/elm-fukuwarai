@@ -10,6 +10,7 @@ type alias Model =
     { windowSize : Size
     , scene : Scene
     , pieces : Pieces
+    , target : Symbol.Pieces
     }
 
 
@@ -68,3 +69,4 @@ type Msg
     | SetPieces Pieces
     | StartOpeningAnimation
     | EndOpeningAnimation
+    | FocusOn Symbol.Pieces

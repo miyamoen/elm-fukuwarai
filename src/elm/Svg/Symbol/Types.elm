@@ -10,6 +10,7 @@ import Svg.Attributes
 type Symbol
     = Angle
     | ElmLogo Pieces
+    | Controller
 
 
 type Pieces
@@ -61,6 +62,9 @@ toId symbol =
 
         ElmLogo Seven ->
             "miyamoen-elm-logo-seven"
+
+        Controller ->
+            "miyamoen-game-controller"
 
 
 id : Symbol -> Attribute msg

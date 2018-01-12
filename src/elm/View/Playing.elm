@@ -1,5 +1,6 @@
 module View.Playing exposing (..)
 
+import Json.Decode as Json
 import Element exposing (..)
 import Element.Input as Input
 import Element.Attributes as Attrs exposing (..)
@@ -8,6 +9,8 @@ import Types exposing (..)
 import Types.Pieces as Pieces
 import Styles exposing (..)
 import View.Pieces
+import View.Helper exposing (..)
+import Svg.Symbol.Controller as Controller
 import Rocket exposing ((=>))
 
 
@@ -30,22 +33,23 @@ field model =
         , height Attrs.fill
         ]
         empty
-        |> within (List.map pieceElement <| Pieces.toList model.pieces)
+        |> within
+            ((List.map View.Pieces.toElement <| Pieces.toList model.pieces) ++ [ controller model ])
 
 
-pieceElement : Piece -> Element Styles variation Msg
-pieceElement { id, position, degree } =
+controller : Model -> Element Styles variation Msg
+controller { pieces, target } =
     let
-        center =
-            Pieces.getCenter id
+        { position } =
+            Pieces.toGetter target pieces
     in
-        el Styles.Pieces
-            [ moveRight <| position.x - center.x
-            , moveDown <| position.y - center.y
+        el Controller
+            [ width <| px 100
+            , height <| px 100
             , inlineStyle
-                [ "transform-origin" => toString center.x ++ "px " ++ toString center.y ++ "px"
-                , "transform" => "rotate(" ++ toString degree ++ "deg)"
+                [ "pointer-events" => "none"
+                , transforms [ Translate (position.x - 50) (position.y - 50) ]
                 ]
             ]
         <|
-            View.Pieces.toElement id
+            Controller.element 100 100

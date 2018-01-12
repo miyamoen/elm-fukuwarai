@@ -4,6 +4,7 @@ import Task
 import Window
 import Types exposing (..)
 import Types.Pieces as Pieces
+import Svg.Symbol.Types as Symbol
 import Random
 import Rocket exposing ((=>))
 
@@ -13,6 +14,7 @@ init =
     { windowSize = { width = 500, height = 500 }
     , scene = Opening Static
     , pieces = Pieces.model
+    , target = Symbol.One
     }
         => [ Task.perform ResizeWindow Window.size ]
 
@@ -35,3 +37,6 @@ update msg model =
 
         EndOpeningAnimation ->
             { model | scene = Playing } => []
+
+        FocusOn target ->
+            { model | target = target } => []

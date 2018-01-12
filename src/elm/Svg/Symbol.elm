@@ -12,6 +12,7 @@ import Colors
 import Rocket exposing ((=>))
 import Svg.Symbol.Types exposing (..)
 import Svg.Symbol.ElmLogo as ElmLogo
+import Svg.Symbol.Controller as Controller
 
 
 ---- Definitions ----
@@ -23,6 +24,7 @@ symbols =
         [ defs []
             [ angle
             , ElmLogo.symbol
+            , Controller.symbol
             , ElmLogo.oneSymbol
             , ElmLogo.twoSymbol
             , ElmLogo.threeSymbol

@@ -22,6 +22,7 @@ type Styles
     | SelectionCursor
     | GameFrame
     | Pieces
+    | Controller
 
 
 type Variations
@@ -108,6 +109,11 @@ styleSheet =
             ]
         , style Pieces
             [ Transition.all ]
+        , style Controller
+            [ strokeFill Colors.danger
+            , strokeWidth 7
+            , Transition.all
+            ]
         ]
 
 
