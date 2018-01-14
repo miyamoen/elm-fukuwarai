@@ -46,6 +46,67 @@ getCenter piece =
             { x = (8.869 + 314.43 + 161.649) / 3, y = (170.517 + 323.298 + 323.298) / 3 }
 
 
+toList : Types.Pieces -> List Piece
+toList pieces =
+    [ pieces.one, pieces.two, pieces.three, pieces.four, pieces.five, pieces.six, pieces.seven ]
+
+
+toGetter : Symbol.Pieces -> (Types.Pieces -> Piece)
+toGetter piece =
+    case piece of
+        One ->
+            .one
+
+        Two ->
+            .two
+
+        Three ->
+            .three
+
+        Four ->
+            .four
+
+        Five ->
+            .five
+
+        Six ->
+            .six
+
+        Seven ->
+            .seven
+
+        All ->
+            Debug.crash "Don't use All symbol"
+
+
+update : Symbol.Pieces -> (Piece -> Piece) -> Types.Pieces -> Types.Pieces
+update id tagger pieces =
+    case id of
+        One ->
+            { pieces | one = tagger pieces.one }
+
+        Two ->
+            { pieces | two = tagger pieces.two }
+
+        Three ->
+            { pieces | three = tagger pieces.three }
+
+        Four ->
+            { pieces | four = tagger pieces.four }
+
+        Five ->
+            { pieces | five = tagger pieces.five }
+
+        Six ->
+            { pieces | six = tagger pieces.six }
+
+        Seven ->
+            { pieces | seven = tagger pieces.seven }
+
+        All ->
+            Debug.crash "Don't use All symbol"
+
+
 
 ---- Random ----
 
@@ -88,36 +149,3 @@ piecesGenerator size =
                     _ ->
                         Debug.crash "random mistake"
             )
-
-
-toList : Types.Pieces -> List Piece
-toList pieces =
-    [ pieces.one, pieces.two, pieces.three, pieces.four, pieces.five, pieces.six, pieces.seven ]
-
-
-toGetter : Symbol.Pieces -> (Types.Pieces -> Piece)
-toGetter piece =
-    case piece of
-        One ->
-            .one
-
-        Two ->
-            .two
-
-        Three ->
-            .three
-
-        Four ->
-            .four
-
-        Five ->
-            .five
-
-        Six ->
-            .six
-
-        Seven ->
-            .seven
-
-        All ->
-            Debug.crash "Don't use All symbol"

@@ -13,6 +13,8 @@ import Rocket exposing ((=>))
 import Svg.Symbol.Types exposing (..)
 import Svg.Symbol.ElmLogo as ElmLogo
 import Svg.Symbol.Controller as Controller
+import Svg.Symbol.RotatingArrows as RotatingArrows
+
 
 
 ---- Definitions ----
@@ -32,6 +34,9 @@ symbols =
             , ElmLogo.fiveSymbol
             , ElmLogo.sixSymbol
             , ElmLogo.sevenSymbol
+            , RotatingArrows.symbol
+            , RotatingArrows.oneSymbol
+            , RotatingArrows.twoSymbol
             ]
         ]
 

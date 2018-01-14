@@ -1,6 +1,5 @@
 module View.Pieces exposing (..)
 
-import Json.Decode as Json
 import Element exposing (Element, el)
 import Element.Attributes exposing (inlineStyle)
 import TypedSvg exposing (svg, use)
@@ -13,6 +12,7 @@ import Types exposing (..)
 import Types.Pieces as Pieces
 import View.Helper exposing (..)
 import Styles exposing (Styles)
+import Controller.Mouse exposing (considerMouseEvent, withKeys)
 import Rocket exposing ((=>))
 
 
@@ -42,7 +42,10 @@ toElement { id, position, degree } =
                     ]
                     [ use
                         [ xlinkHref <| toSelector (ElmLogo id)
-                        , on "click" <| Json.succeed (FocusOn id)
+                        , on "click" <|
+                            considerMouseEvent <|
+                                withKeys { alt = False, ctrl = True, shift = False }
+                                    (always <| FocusOn id)
                         , pointerEvents "auto"
                         ]
                         []

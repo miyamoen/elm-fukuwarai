@@ -27,7 +27,8 @@ update msg model =
 
         ResizeWindow size ->
             { model | windowSize = size }
-                => [ Pieces.piecesGenerator size |> Random.generate SetPieces ]
+                => [ Pieces.piecesGenerator size |> Random.generate SetPieces
+                   ]
 
         SetPieces pieces ->
             { model | pieces = pieces } => []
@@ -40,3 +41,11 @@ update msg model =
 
         FocusOn target ->
             { model | target = target } => []
+
+        PointPosition { offsetPos, clientPos } ->
+            let
+                position =
+                    { x = Tuple.first clientPos - 20, y = Tuple.second clientPos - 20 }
+            in
+                { model | pieces = Pieces.update model.target (\piece -> { piece | position = position }) model.pieces }
+                    => []

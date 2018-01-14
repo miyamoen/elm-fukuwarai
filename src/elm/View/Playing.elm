@@ -11,6 +11,8 @@ import Styles exposing (..)
 import View.Pieces
 import View.Helper exposing (..)
 import Svg.Symbol.Controller as Controller
+import Svg.Symbol.RotatingArrows as RotatingArrows
+import Controller.Mouse exposing (onNormalClick)
 import Rocket exposing ((=>))
 
 
@@ -31,6 +33,8 @@ field model =
     el GameFrame
         [ width Attrs.fill
         , height Attrs.fill
+        , id "gameframe"
+        , onNormalClick PointPosition
         ]
         empty
         |> within
@@ -52,4 +56,4 @@ controller { pieces, target } =
                 ]
             ]
         <|
-            Controller.element 100 100
+            RotatingArrows.element 100 100

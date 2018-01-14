@@ -11,6 +11,7 @@ type Symbol
     = Angle
     | ElmLogo Pieces
     | Controller
+    | RotatingArrows Pieces
 
 
 type Pieces
@@ -65,6 +66,18 @@ toId symbol =
 
         Controller ->
             "miyamoen-game-controller"
+
+        RotatingArrows One ->
+            "miyamoen-game-rotating-arrows-one"
+
+        RotatingArrows Two ->
+            "miyamoen-game-rotating-arrows-two"
+
+        RotatingArrows All ->
+            "miyamoen-game-rotating-arrows"
+
+        RotatingArrows _ ->
+            Debug.crash "invalid symbol"
 
 
 id : Symbol -> Attribute msg

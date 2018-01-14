@@ -108,11 +108,11 @@ styleSheet =
             -- , Border.dotted
             ]
         , style Pieces
-            [ Transition.all ]
+            [ Transition.performant ]
         , style Controller
             [ strokeFill Colors.danger
             , strokeWidth 7
-            , Transition.all
+            , Transition.performant
             ]
         ]
 

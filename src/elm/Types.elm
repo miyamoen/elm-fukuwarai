@@ -1,5 +1,6 @@
 module Types exposing (..)
 
+import Mouse
 import Svg.Symbol.Types as Symbol
 
 
@@ -70,3 +71,4 @@ type Msg
     | StartOpeningAnimation
     | EndOpeningAnimation
     | FocusOn Symbol.Pieces
+    | PointPosition Mouse.Event
