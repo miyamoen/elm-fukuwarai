@@ -25,13 +25,13 @@ import Svg.Symbol.Types exposing (..)
 
 size : { width : Float, height : Float }
 size =
-    { width = 128, height = 128 }
+    { width = 512, height = 512 }
 
 
 symbol : Svg msg
 symbol =
     TypedSvg.symbol
-        [ viewBox 0 0 512 512
+        [ viewBox 0 0 size.width size.height
         , id <| RotatingArrows All
         ]
         [ one, two ]

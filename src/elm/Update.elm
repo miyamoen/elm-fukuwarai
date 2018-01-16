@@ -47,5 +47,23 @@ update msg model =
                 position =
                     { x = Tuple.first clientPos - 20, y = Tuple.second clientPos - 20 }
             in
-                { model | pieces = Pieces.update model.target (\piece -> { piece | position = position }) model.pieces }
+                { model
+                    | pieces =
+                        Pieces.update model.target
+                            (\piece ->
+                                { piece | position = position }
+                            )
+                            model.pieces
+                }
                     => []
+
+        RotatePiece degree ->
+            { model
+                | pieces =
+                    Pieces.update model.target
+                        (\piece ->
+                            { piece | degree = piece.degree - degree }
+                        )
+                        model.pieces
+            }
+                => []

@@ -12,6 +12,7 @@ type Symbol
     | ElmLogo Pieces
     | Controller
     | RotatingArrows Pieces
+    | PointCursor
 
 
 type Pieces
@@ -78,6 +79,9 @@ toId symbol =
 
         RotatingArrows _ ->
             Debug.crash "invalid symbol"
+
+        PointCursor ->
+            "miyamoen-game-point-cursor"
 
 
 id : Symbol -> Attribute msg

@@ -4,17 +4,14 @@ import Html exposing (Html)
 import Element exposing (Element)
 import Svg exposing (Svg)
 import TypedSvg exposing (..)
-import TypedSvg.Types exposing (..)
 import TypedSvg.Attributes exposing (viewBox, points, xlinkHref, noFill, fill, points, transform)
 import TypedSvg.Attributes.InPx exposing (x, y, width, height, strokeWidth)
-import Color exposing (rgba)
-import Colors
 import Rocket exposing ((=>))
 import Svg.Symbol.Types exposing (..)
 import Svg.Symbol.ElmLogo as ElmLogo
 import Svg.Symbol.Controller as Controller
 import Svg.Symbol.RotatingArrows as RotatingArrows
-
+import Svg.Symbol.PointCursor as PointCursor
 
 
 ---- Definitions ----
@@ -37,6 +34,7 @@ symbols =
             , RotatingArrows.symbol
             , RotatingArrows.oneSymbol
             , RotatingArrows.twoSymbol
+            , PointCursor.symbol
             ]
         ]
 

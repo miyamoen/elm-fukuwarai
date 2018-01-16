@@ -22,7 +22,7 @@ type Styles
     | SelectionCursor
     | GameFrame
     | Pieces
-    | Controller
+    | Cursor
 
 
 type Variations
@@ -109,9 +109,8 @@ styleSheet =
             ]
         , style Pieces
             [ Transition.performant ]
-        , style Controller
-            [ strokeFill Colors.danger
-            , strokeWidth 7
+        , style Cursor
+            [ fill Colors.ink
             , Transition.performant
             ]
         ]

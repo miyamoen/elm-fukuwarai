@@ -12,6 +12,7 @@ import View.Pieces
 import View.Helper exposing (..)
 import Svg.Symbol.Controller as Controller
 import Svg.Symbol.RotatingArrows as RotatingArrows
+import Svg.Symbol.PointCursor as PointCursor
 import Controller.Mouse exposing (onNormalClick)
 import Rocket exposing ((=>))
 
@@ -42,12 +43,12 @@ field model =
 
 
 controller : Model -> Element Styles variation Msg
-controller { pieces, target } =
+controller ({ pieces, target } as model) =
     let
         { position } =
             Pieces.toGetter target pieces
     in
-        el Controller
+        el Cursor
             [ width <| px 100
             , height <| px 100
             , inlineStyle
@@ -56,4 +57,12 @@ controller { pieces, target } =
                 ]
             ]
         <|
-            RotatingArrows.element 100 100
+            pointCursor model
+
+
+pointCursor : Model -> Element Styles variation Msg
+pointCursor model =
+    el None
+        []
+        (RotatingArrows.element 100 100)
+        |> within [ row None [ width <| px 100, height <| px 100, center, verticalCenter ] [ PointCursor.element 50 50 ] ]

@@ -16,6 +16,12 @@ toMsg model { altKey, ctrlKey, shiftKey, metaKey, key, keyCode, repeat } =
         ( Key.Enter, False, False ) ->
             Just StartOpeningAnimation
 
+        ( Key.R, False, False ) ->
+            Just (RotatePiece 5)
+
+        ( Key.R, True, False ) ->
+            Just (RotatePiece 15)
+
         _ ->
             Nothing
 
