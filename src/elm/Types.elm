@@ -72,4 +72,5 @@ type Msg
     | EndOpeningAnimation
     | FocusOn Symbol.Pieces
     | PointPosition Mouse.Event
+    | MoveTarget ( Float, Float )
     | RotatePiece Float

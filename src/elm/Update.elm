@@ -4,6 +4,7 @@ import Task
 import Window
 import Types exposing (..)
 import Types.Pieces as Pieces
+import Types.Positions as Positions
 import Svg.Symbol.Types as Symbol
 import Random
 import Rocket exposing ((=>))
@@ -56,6 +57,17 @@ update msg model =
                             model.pieces
                 }
                     => []
+
+        MoveTarget delta ->
+            { model
+                | pieces =
+                    Pieces.update model.target
+                        (\piece ->
+                            { piece | position = Positions.add delta piece.position }
+                        )
+                        model.pieces
+            }
+                => []
 
         RotatePiece degree ->
             { model

@@ -12,15 +12,45 @@ import Types exposing (..)
 
 toMsg : Model -> KeyboardEvent -> Maybe Msg
 toMsg model { altKey, ctrlKey, shiftKey, metaKey, key, keyCode, repeat } =
-    case ( keyCode, ctrlKey, shiftKey ) of
-        ( Key.Enter, False, False ) ->
+    case ( model.scene, keyCode, ctrlKey, shiftKey ) of
+        ( Opening Static, Key.Enter, False, False ) ->
             Just StartOpeningAnimation
 
-        ( Key.R, False, False ) ->
+        ( Playing, Key.J, False, False ) ->
             Just (RotatePiece 5)
 
-        ( Key.R, True, False ) ->
+        ( Playing, Key.J, True, False ) ->
             Just (RotatePiece 15)
+
+        ( Playing, Key.K, False, False ) ->
+            Just (RotatePiece -5)
+
+        ( Playing, Key.K, True, False ) ->
+            Just (RotatePiece -15)
+
+        ( Playing, Key.Down, False, False ) ->
+            Just (MoveTarget ( 0, 1 ))
+
+        ( Playing, Key.Down, True, False ) ->
+            Just (MoveTarget ( 0, 25 ))
+
+        ( Playing, Key.Up, False, False ) ->
+            Just (MoveTarget ( 0, -1 ))
+
+        ( Playing, Key.Up, True, False ) ->
+            Just (MoveTarget ( 0, -25 ))
+
+        ( Playing, Key.Right, False, False ) ->
+            Just (MoveTarget ( 1, 0 ))
+
+        ( Playing, Key.Right, True, False ) ->
+            Just (MoveTarget ( 25, 0 ))
+
+        ( Playing, Key.Left, False, False ) ->
+            Just (MoveTarget ( -1, 0 ))
+
+        ( Playing, Key.Left, True, False ) ->
+            Just (MoveTarget ( -25, 0 ))
 
         _ ->
             Nothing
