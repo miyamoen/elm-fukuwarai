@@ -8,49 +8,95 @@ import Element.Events exposing (on, onWithOptions)
 import Keyboard.Event exposing (considerKeyboardEvent, KeyboardEvent)
 import Keyboard.Key as Key
 import Types exposing (..)
+import Svg.Symbol.Types exposing (Pieces(..))
 
 
 toMsg : Model -> KeyboardEvent -> Maybe Msg
-toMsg model { altKey, ctrlKey, shiftKey, metaKey, key, keyCode, repeat } =
-    case ( model.scene, keyCode, ctrlKey, shiftKey ) of
-        ( Opening Static, Key.Enter, False, False ) ->
+toMsg model event =
+    case model.scene of
+        Opening _ ->
+            toMsgInOpening model event
+
+        Playing ->
+            toMsgInPlaying model event
+
+
+toMsgInOpening : Model -> KeyboardEvent -> Maybe Msg
+toMsgInOpening model { altKey, ctrlKey, shiftKey, keyCode } =
+    case keyCode of
+        Key.Enter ->
             Just StartOpeningAnimation
 
-        ( Playing, Key.J, False, False ) ->
+        _ ->
+            Nothing
+
+
+toMsgInPlaying : Model -> KeyboardEvent -> Maybe Msg
+toMsgInPlaying model { altKey, ctrlKey, shiftKey, keyCode } =
+    case ( keyCode, ctrlKey ) of
+        ( Key.J, False ) ->
             Just (RotatePiece 5)
 
-        ( Playing, Key.J, True, False ) ->
+        ( Key.J, True ) ->
             Just (RotatePiece 15)
 
-        ( Playing, Key.K, False, False ) ->
+        ( Key.K, False ) ->
             Just (RotatePiece -5)
 
-        ( Playing, Key.K, True, False ) ->
+        ( Key.K, True ) ->
             Just (RotatePiece -15)
 
-        ( Playing, Key.Down, False, False ) ->
+        ( Key.Down, False ) ->
             Just (MoveTarget ( 0, 1 ))
 
-        ( Playing, Key.Down, True, False ) ->
+        ( Key.Down, True ) ->
             Just (MoveTarget ( 0, 25 ))
 
-        ( Playing, Key.Up, False, False ) ->
+        ( Key.Up, False ) ->
             Just (MoveTarget ( 0, -1 ))
 
-        ( Playing, Key.Up, True, False ) ->
+        ( Key.Up, True ) ->
             Just (MoveTarget ( 0, -25 ))
 
-        ( Playing, Key.Right, False, False ) ->
+        ( Key.Right, False ) ->
             Just (MoveTarget ( 1, 0 ))
 
-        ( Playing, Key.Right, True, False ) ->
+        ( Key.Right, True ) ->
             Just (MoveTarget ( 25, 0 ))
 
-        ( Playing, Key.Left, False, False ) ->
+        ( Key.Left, False ) ->
             Just (MoveTarget ( -1, 0 ))
 
-        ( Playing, Key.Left, True, False ) ->
+        ( Key.Left, True ) ->
             Just (MoveTarget ( -25, 0 ))
+
+        ( Key.Enter, _ ) ->
+            Just <|
+                FocusOn <|
+                    case model.target of
+                        One ->
+                            Two
+
+                        Two ->
+                            Three
+
+                        Three ->
+                            Four
+
+                        Four ->
+                            Five
+
+                        Five ->
+                            Six
+
+                        Six ->
+                            Seven
+
+                        Seven ->
+                            One
+
+                        All ->
+                            One
 
         _ ->
             Nothing
