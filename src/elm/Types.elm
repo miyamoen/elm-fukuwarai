@@ -11,7 +11,7 @@ type alias Model =
     { windowSize : Size
     , scene : Scene
     , pieces : Pieces
-    , target : Symbol.Pieces
+    , target : Maybe Symbol.Pieces
     }
 
 
@@ -70,7 +70,7 @@ type Msg
     | SetPieces Pieces
     | StartOpeningAnimation
     | EndOpeningAnimation
-    | FocusOn Symbol.Pieces
+    | FocusOn (Maybe Symbol.Pieces)
     | PointPosition Mouse.Event
     | MoveTarget ( Float, Float )
     | RotatePiece Float

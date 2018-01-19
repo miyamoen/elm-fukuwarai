@@ -15,7 +15,7 @@ init =
     { windowSize = { width = 500, height = 500 }
     , scene = Opening Static
     , pieces = Pieces.model
-    , target = Symbol.One
+    , target = Just Symbol.One
     }
         => [ Task.perform ResizeWindow Window.size ]
 
@@ -44,38 +44,53 @@ update msg model =
             { model | target = target } => []
 
         PointPosition { offsetPos, clientPos } ->
-            let
-                position =
-                    { x = Tuple.first clientPos - 20, y = Tuple.second clientPos - 20 }
-            in
-                { model
-                    | pieces =
-                        Pieces.update model.target
-                            (\piece ->
-                                { piece | position = position }
-                            )
-                            model.pieces
-                }
-                    => []
+            case model.target of
+                Nothing ->
+                    model => []
+
+                Just targetPiece ->
+                    let
+                        position =
+                            { x = Tuple.first clientPos - 20, y = Tuple.second clientPos - 20 }
+                    in
+                        { model
+                            | pieces =
+                                Pieces.update targetPiece
+                                    (\piece ->
+                                        { piece | position = position }
+                                    )
+                                    model.pieces
+                        }
+                            => []
 
         MoveTarget delta ->
-            { model
-                | pieces =
-                    Pieces.update model.target
-                        (\piece ->
-                            { piece | position = Positions.add delta piece.position }
-                        )
-                        model.pieces
-            }
-                => []
+            case model.target of
+                Nothing ->
+                    model => []
+
+                Just targetPiece ->
+                    { model
+                        | pieces =
+                            Pieces.update targetPiece
+                                (\piece ->
+                                    { piece | position = Positions.add delta piece.position }
+                                )
+                                model.pieces
+                    }
+                        => []
 
         RotatePiece degree ->
-            { model
-                | pieces =
-                    Pieces.update model.target
-                        (\piece ->
-                            { piece | degree = piece.degree - degree }
-                        )
-                        model.pieces
-            }
-                => []
+            case model.target of
+                Nothing ->
+                    model => []
+
+                Just targetPiece ->
+                    { model
+                        | pieces =
+                            Pieces.update targetPiece
+                                (\piece ->
+                                    { piece | degree = piece.degree - degree }
+                                )
+                                model.pieces
+                    }
+                        => []

@@ -74,29 +74,32 @@ toMsgInPlaying model { altKey, ctrlKey, shiftKey, keyCode } =
             Just <|
                 FocusOn <|
                     case model.target of
-                        One ->
-                            Two
+                        Just One ->
+                            Just Two
 
-                        Two ->
-                            Three
+                        Just Two ->
+                            Just Three
 
-                        Three ->
-                            Four
+                        Just Three ->
+                            Just Four
 
-                        Four ->
-                            Five
+                        Just Four ->
+                            Just Five
 
-                        Five ->
-                            Six
+                        Just Five ->
+                            Just Six
 
-                        Six ->
-                            Seven
+                        Just Six ->
+                            Just Seven
 
-                        Seven ->
-                            One
+                        Just Seven ->
+                            Nothing
 
-                        All ->
-                            One
+                        Just All ->
+                            Just One
+
+                        Nothing ->
+                            Just One
 
         _ ->
             Nothing

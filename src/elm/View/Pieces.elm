@@ -45,7 +45,7 @@ toElement { id, position, degree } =
                         , on "click" <|
                             considerMouseEvent <|
                                 withKeys { alt = False, ctrl = True, shift = False }
-                                    (always <| FocusOn id)
+                                    (always <| FocusOn <| Just id)
                         , pointerEvents "auto"
                         ]
                         []

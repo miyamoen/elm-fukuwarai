@@ -1,16 +1,12 @@
 module View.Playing exposing (..)
 
-import Json.Decode as Json
 import Element exposing (..)
-import Element.Input as Input
 import Element.Attributes as Attrs exposing (..)
-import Element.Events exposing (..)
 import Types exposing (..)
 import Types.Pieces as Pieces
 import Styles exposing (..)
 import View.Pieces
 import View.Helper exposing (..)
-import Svg.Symbol.Controller as Controller
 import Svg.Symbol.RotatingArrows as RotatingArrows
 import Svg.Symbol.PointCursor as PointCursor
 import Controller.Mouse exposing (onNormalClick)
@@ -44,20 +40,22 @@ field model =
 
 controller : Model -> Element Styles variation Msg
 controller ({ pieces, target } as model) =
-    let
-        { position } =
-            Pieces.toGetter target pieces
-    in
-        el Cursor
-            [ width <| px 100
-            , height <| px 100
-            , inlineStyle
-                [ "pointer-events" => "none"
-                , transforms [ Translate (position.x - 50) (position.y - 50) ]
-                ]
-            ]
-        <|
-            pointCursor model
+    target
+        |> Maybe.map (\piece -> Pieces.toGetter piece pieces)
+        |> Maybe.map
+            (\{ position } ->
+                el Cursor
+                    [ width <| px 100
+                    , height <| px 100
+                    , inlineStyle
+                        [ "pointer-events" => "none"
+                        , transforms [ Translate (position.x - 50) (position.y - 50) ]
+                        ]
+                    ]
+                <|
+                    pointCursor model
+            )
+        |> Maybe.withDefault empty
 
 
 pointCursor : Model -> Element Styles variation Msg
