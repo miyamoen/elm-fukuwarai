@@ -49,19 +49,13 @@ update msg model =
                     model => []
 
                 Just targetPiece ->
-                    let
-                        position =
-                            { x = Tuple.first clientPos - 20, y = Tuple.second clientPos - 20 }
-                    in
-                        { model
-                            | pieces =
-                                Pieces.update targetPiece
-                                    (\piece ->
-                                        { piece | position = position }
-                                    )
-                                    model.pieces
-                        }
-                            => []
+                    { model
+                        | pieces =
+                            Pieces.positionUpdate targetPiece
+                                (\_ -> { x = Tuple.first clientPos - 20, y = Tuple.second clientPos - 20 })
+                                model.pieces
+                    }
+                        => []
 
         MoveTarget delta ->
             case model.target of
@@ -71,15 +65,17 @@ update msg model =
                 Just targetPiece ->
                     { model
                         | pieces =
-                            Pieces.update targetPiece
-                                (\piece ->
-                                    { piece | position = Positions.add delta piece.position }
+                            Pieces.positionUpdate targetPiece
+                                (\position ->
+                                    Positions.add delta position
+                                        |> Positions.clamp ( 0, 0 )
+                                            ( toFloat (model.windowSize.width - 40), toFloat (model.windowSize.height - 40) )
                                 )
                                 model.pieces
                     }
                         => []
 
-        RotatePiece degree ->
+        RotatePiece delta ->
             case model.target of
                 Nothing ->
                     model => []
@@ -87,10 +83,8 @@ update msg model =
                 Just targetPiece ->
                     { model
                         | pieces =
-                            Pieces.update targetPiece
-                                (\piece ->
-                                    { piece | degree = piece.degree - degree }
-                                )
+                            Pieces.degreeUpdate targetPiece
+                                (\degree -> degree - delta)
                                 model.pieces
                     }
                         => []

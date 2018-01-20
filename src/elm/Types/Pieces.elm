@@ -107,6 +107,16 @@ update id tagger pieces =
             Debug.crash "Don't use All symbol"
 
 
+positionUpdate : Symbol.Pieces -> (Position -> Position) -> Types.Pieces -> Types.Pieces
+positionUpdate id tagger pieces =
+    update id (\piece -> { piece | position = tagger piece.position }) pieces
+
+
+degreeUpdate : Symbol.Pieces -> (Float -> Float) -> Types.Pieces -> Types.Pieces
+degreeUpdate id tagger pieces =
+    update id (\piece -> { piece | degree = tagger piece.degree }) pieces
+
+
 
 ---- Random ----
 
